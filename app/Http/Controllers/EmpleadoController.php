@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
 
 class EmpleadoController extends Controller
 {
@@ -95,11 +96,27 @@ class EmpleadoController extends Controller
         //En esta parte se recuperan los datos que se envian de la pagina
         //a excepcion de del token y el metodo PATH 
         //para posteriormente ser actualizados en la base de datos
+        if($request->hasFile('Foto')){
+            $empleado=Empleado::findOrFail($id);
+            //En esta parte se solicita el registro en la base de datos
+
+            Storage::delete('public/'.$empleado->Foto);
+            //En esta parte se eliminara la fotografia que se encuentre en storage
+            $datosEmpleado['Foto']=$request->file('Foto')->store('uploads','public');
+        }
+        //En esta parte de codigo se pregunta si existe una foto en el registro
+        //En el caso de que esta fotografia exista entoces se obtiene un nombre de 
+        //fotografia ferente y se actualiza el registro
         Empleado::where('id','=',$id)->update($datosEmpleado);
         //El modelo Empleado solicita el registro que tenga la siguiente id
         //despues de eso se hace un update o actualizacon del registro
         $empleado=Empleado::findOrFail($id);
+        //En esta parte se solicita el registro ya actualizado
         return view('empleado.edit', compact('empleado'));
+        //y posteriormente en esta linea se devuelve al usuario la infromacion 
+        //del registro
+
+        //1:33:20 Youtube curso de laravel
     }
 
     /**
