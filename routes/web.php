@@ -29,3 +29,10 @@ Route::get('/empleado/create', [EmpleadoController::class,'create']);
 */
 Route::resource('empleado',EmpleadoController::class);
 //Con esta linea de codigo podremos tener acceso a todas los metodos del controlador
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
