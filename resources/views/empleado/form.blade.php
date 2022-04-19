@@ -1,19 +1,21 @@
 
     <label for="Nombre">Nombre</label>
-    <input type="text" name="Nombre" value="{{ $empleado->Nombre }}" id="Nombre">
+    <input type="text" name="Nombre" value="{{isset($empleado->Nombre)?$empleado->Nombre:'' }}" id="Nombre">
 
     <label for="ApellidoPaterno">Apellido Paterno</label>
-    <input type="text" name="ApellidoPaterno" value="{{ $empleado->ApellidoPaterno }}" id="ApellidoPaterno">
+    <input type="text" name="ApellidoPaterno" value="{{ isset($empleado->ApellidoPaterno)?$empleado->ApellidoPaterno:'' }}" id="ApellidoPaterno">
 
     <label for="ApellidoMaterno">Apellido Materno</label>
-    <input type="text" name="ApellidoMaterno" value="{{ $empleado->ApellidoMaterno }}" id="ApellidoMaterno">
+    <input type="text" name="ApellidoMaterno" value="{{ isset($empleado->ApellidoMaterno)?$empleado->ApellidoMaterno:'' }}" id="ApellidoMaterno">
 
     <label for="Correo">Correo</label>
-    <input type="text" name="Correo" value="{{ $empleado->Correo }}" id="Correo">
+    <input type="text" name="Correo" value="{{ isset($empleado->Correo)?$empleado->Correo:'' }}" id="Correo">
 
     <label for="Foto">Foto</label>
+    @if(isset($empleado->Foto))
     <img src="{{ asset('storage').'/'.$empleado->Foto }}" height="80" alt="">
-    {{ $empleado->Foto }}
+    @endif
     <input type="file" name="Foto" value="" id="Foto">
 
     <input type="Submit"  value="Guardar">
+    <a href="{{url('empleado/')}}">Regresar</a>
