@@ -51,7 +51,7 @@ class EmpleadoController extends Controller
         $campos=[
         'Nombre'=>'required|string|max:100',
         'ApellidoPaterno'=>'required|string|max:100',
-        'ApellidoMaterno'=>'required|string|max:00',
+        'ApellidoMaterno'=>'required|string|max:100',
         'Correo'=>'required|email',
         'Foto'=> 'required|max:10000|mimes:jpeg,jpg,png',
         ];
@@ -106,6 +106,23 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+            'ApellidoPaterno'=>'required|string|max:100',
+            'ApellidoMaterno'=>'required|string|max:100',
+            'Correo'=>'required|email',
+           
+            ];
+            $mensaje=[
+                'required'=>'El :attribute es requerido',
+                
+            ];
+            if($request->hasFile('Foto')){
+                $campos=[ 'Foto'=> 'required|max:10000|mimes:jpeg,jpg,png',];
+                $mensaje=['Foto.required'=>'La foto requerida'];
+            }
+            $this->validate($request, $campos, $mensaje);
+
         $datosEmpleado = request()->except(['_token', '_method']);
         //En esta parte se recuperan los datos que se envian de la pagina
         //a excepcion de del token y el metodo PATH 
