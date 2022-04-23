@@ -1,4 +1,8 @@
-Formulario de creacion de empleado.
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
 <body>
     
 
@@ -7,3 +11,5 @@ Formulario de creacion de empleado.
     @include('empleado.form',['modo'=>'Crear'])
 </form>
 </body>
+</div>
+@endsection

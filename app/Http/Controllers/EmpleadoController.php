@@ -47,6 +47,19 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
+        //Validando la entrada de datos con la siguiente linea
+        $campos=[
+        'Nombre'=>'required|string|max:100',
+        'ApellidoPaterno'=>'required|string|max:100',
+        'ApellidoMaterno'=>'required|string|max:00',
+        'Correo'=>'required|email',
+        'Foto'=> 'required|max:10000|mimes:jpeg,jpg,png',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'Foto.required'=>'La foto es requerida'
+        ];
+        $this->validate($request, $campos, $mensaje);
         //En este comando proximo se solicita guardar toda la informacion en la variable $datosEmpleados
         //$datosEmpleado = request()->all();
         //----------------------------------
