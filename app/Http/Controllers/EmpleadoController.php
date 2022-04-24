@@ -16,7 +16,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $datos['empleados']=Empleado::paginate(5);
+        $datos['empleados']=Empleado::paginate(1);
         //En esta linea el arreglo empleados tendra hasta 5
         //paginas de informacio usando el modelo Empleado 
 
@@ -143,11 +143,11 @@ class EmpleadoController extends Controller
         //despues de eso se hace un update o actualizacon del registro
         $empleado=Empleado::findOrFail($id);
         //En esta parte se solicita el registro ya actualizado
-        return view('empleado.edit', compact('empleado'));
+        // --- return view('empleado.edit', compact('empleado')); 
         //y posteriormente en esta linea se devuelve al usuario la infromacion 
         //del registro
-
         //1:33:20 Youtube curso de laravel
+        return redirect('empleado')->with('mensaje','Empleado borrado');
     }
 
     /**
